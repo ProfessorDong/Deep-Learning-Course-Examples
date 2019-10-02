@@ -104,7 +104,7 @@ I_original = visualize_original(100,100,A,A)
 
 I = visualize_2layer(100,100,A,A,curr_W1,curr_b1,curr_W2,curr_b2)
 
-f = plt.figure()
+f = plt.figure(figsize=(16, 8))
 
 f.add_subplot(1,2, 1)
 plt.imshow(I_original)
@@ -116,7 +116,7 @@ x = np.linspace(-A, A, 100)
 y = np.linspace(-A, A, 100)
 X, Y = np.meshgrid(x, y)
 
-fig = plt.figure(figsize=(16, 16))
+fig = plt.figure(figsize=(16, 8))
 ax1 = fig.add_subplot(121,projection='3d')
 ax1.plot_wireframe(X, Y, I_original)
 ax2 = fig.add_subplot(122,projection='3d')
