@@ -1,4 +1,8 @@
 # Deep Learning Course Examples
-Course Examples of Introduction to Deep Learning in TensorFlow and Keras
+Baylor University, Department of Electrical and Computer Engineering
 
-Department of Electrical and Computer Engineering, Baylor University
+Introduction to Deep Learning
+
+Course Examples in TensorFlow and Keras
+
+
