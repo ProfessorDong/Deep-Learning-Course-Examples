@@ -5,8 +5,8 @@ Baylor University, Department of Electrical and Computer Engineering
 
 Course Examples in TensorFlow and Keras:
 
-1. Train a two-layer neural network to approximate a 2D function:    FuncApproxNN.py
-2. LeNet on MNIST dataset
+1. Train a two-layer neural network to approximate a 2D function >    FuncApproxNN.py
+2. LeNet on MNIST dataset > LeNet_MNIST.py, LeNet_MNIST_keras.py, LeNet_MNIST_keras2.py
 
 ![Image of LeNet](https://github.com/ProfessorDong/Deep-Learning-Course-Examples/blob/master/figures/lenet.svg)
 
