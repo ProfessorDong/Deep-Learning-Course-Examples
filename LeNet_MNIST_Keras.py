@@ -42,7 +42,7 @@ model.add(Conv2D(6, kernel_size=(5,5), padding='same', input_shape=input_shape))
 #First Pooling Layer
 model.add(MaxPooling2D(pool_size=(2, 2))) # Max pooling is used here, instead of avg pooling
 #Second Convolutional Layer
-model.add(Conv2D(16, kernel_size=(5,5), input_shape=input_shape))
+model.add(Conv2D(16, kernel_size=(5,5)))
 #Second Pooling Layer
 model.add(MaxPooling2D(pool_size=(2, 2))) # Max pooling is used here, instead of avg pooling
 #First Fully Connected Layer
