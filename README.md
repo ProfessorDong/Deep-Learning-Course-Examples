@@ -11,3 +11,7 @@ Course Examples in TensorFlow and Keras:
 * LeNet Architecture
 ![Image of LeNet](https://github.com/ProfessorDong/Deep-Learning-Course-Examples/blob/master/figures/lenet.svg)
 ![Table of LeNet](https://github.com/ProfessorDong/Deep-Learning-Course-Examples/blob/master/figures/LeNEt_Summary_Table.jpg)
+4. VGG
+* VGG-16 Architecture
+![Image of VGG16](https://github.com/ProfessorDong/Deep-Learning-Course-Examples/blob/master/figures/imagenet_vgg16.png)
+![Table of VGG16]()
