@@ -13,7 +13,7 @@ Course Examples in TensorFlow and Keras:
 
 ![Image of LeNet](https://github.com/ProfessorDong/Deep-Learning-Course-Examples/blob/master/figures/lenet.svg)
 
-![Table of LeNet](https://github.com/ProfessorDong/Deep-Learning-Course-Examples/blob/master/figures/LeNet_Summary_Table.jpeg)
+![Table of LeNet](https://github.com/ProfessorDong/Deep-Learning-Course-Examples/blob/master/figures/LeNet_Summary_Table.jpeg)<!-- .element height="50%" width="50%" -->
 
 4. VGG: 
 
