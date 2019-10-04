@@ -10,6 +10,7 @@ Course Examples in TensorFlow and Keras:
 3. LeNet on CIFAR-10 dataset: **LeNet_CIFAR10.py**, **LeNet_dp_da_CIFAR10.py**
 
 * LeNet Architecture
+
 ![Image of LeNet](https://github.com/ProfessorDong/Deep-Learning-Course-Examples/blob/master/figures/lenet.svg)
 
 ![Table of LeNet](https://github.com/ProfessorDong/Deep-Learning-Course-Examples/blob/master/figures/LeNet_Summary_Table.jpeg)
