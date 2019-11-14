@@ -25,7 +25,7 @@ def stack_frames(stacked_frames, frame, buffer_size):
 
 if __name__ == '__main__':
 
-    env = gym.make('Breakout-v0')
+    env = gym.make('BreakoutDeterministic-v4')
     load_checkpoint = False
     agent = Agent(gamma=0.99, epsilon=1.0, alpha=0.000025, input_dims=(180,160,4), 
                   n_actions=3, mem_size=25000, batch_size=64)
@@ -67,3 +67,26 @@ if __name__ == '__main__':
             print('episode: ', i,'score: ', score)
         eps_history.append(agent.epsilon)
         scores.append(score)
+    
+    # Test the trained model
+    done = False
+    observation = env.reset()
+    observation = preprocess(observation)
+    stacked_frames = None
+    observation = stack_frames(stacked_frames, observation, stack_size)
+    score = 0
+    while not done:
+        env.render()  # Render
+        state = np.array(observation, copy=False, dtype=np.float32)
+        actions = agent.q_eval.predict(state)
+        action = np.argmax(actions)
+        action += 1
+        observation_, reward, done, info = env.step(action)
+        observation_ = stack_frames(stacked_frames, preprocess(observation_), stack_size)
+        score += reward
+        action -= 1
+        observation = observation_
+    
+    env.close()
+    print('Model is trained with %i games' % numGames)
+    print('Test score: ', score)

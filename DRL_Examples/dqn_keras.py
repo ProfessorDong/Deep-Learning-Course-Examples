@@ -114,5 +114,5 @@ class Agent(object):
 
     def load_models(self):
         self.q_eval = load_model(self.q_eval_model_file)
-        self.q_nexdt = load_model(self.q_target_model_file)
+        self.q_next = load_model(self.q_target_model_file)
         print('... loading models ...')
