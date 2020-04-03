@@ -43,7 +43,7 @@ Course Examples in TensorFlow and Keras:
    
    Algorithm for REINFORCE Policy Gradients:
    
-   ![Image of REINFORCE](https://github.com/ProfessorDong/Deep-Learning-Course-Examples/blob/master/figures/REINFORCE.jpg) 
+   ![Image of REINFORCE](https://github.com/ProfessorDong/Deep-Learning-Course-Examples/blob/master/figures/REINFORCE.jpeg) 
    
 5. Actor-Critic Method to play the cartpole game.
 
