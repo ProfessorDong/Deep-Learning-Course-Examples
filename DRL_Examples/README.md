@@ -27,6 +27,9 @@ Course Examples in TensorFlow and Keras:
    **RL_DeepQNetwork.py**  (Deep Q Network Class)
    
    Note: (1) Train DNN while playing games and increasing experience; (2) Single-step update of DNN parameters; (3) Experience replay with low correlation; (4) Fixed Q-targets.
+   
+   Algorithm for Deep-Q Learning with Experience Replay:
+   
    ![Image of DNN with Experience Replay](https://github.com/ProfessorDong/Deep-Learning-Course-Examples/blob/master/figures/DQN_experiencereplay.png) 
    
 
