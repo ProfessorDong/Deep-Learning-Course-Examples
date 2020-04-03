@@ -22,16 +22,16 @@ Course Examples in TensorFlow and Keras:
    
 3. Deep Q Learning to play the cartpole game.
    
-   **DQN_run_cartpole.py**  (Main program)
+   **DQN_run_cartpole.py**  (Main program - Tensorflow 1.0)
    
    **RL_DeepQNetwork.py**  (Deep Q Network Class)
    
-   Note: (1) Train DNN and increase experience while playing games; (2) Single-step update of DNN parameters; (3) Experience replay with low correlation; (4) Fixed Q-targets.
+   Note: (1) Train DNN while playing games and increasing experience; (2) Single-step update of DNN parameters; (3) Experience replay with low correlation; (4) Fixed Q-targets.
    
 
 4. Policy Gradient Method to play the cartpole game.
 
-   **PolicyGradient_run_cartpole.py**  (Main program with (1) update over episodes)
+   **PolicyGradient_run_cartpole.py**  (Main program - Tensorflow 1.0)
    
    **RL_PolicyGradient.py**  (Policy Gradient Class)
    
