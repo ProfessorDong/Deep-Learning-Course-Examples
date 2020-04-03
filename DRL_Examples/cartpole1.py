@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Apr  3 17:24:56 2019
-
-@author: dongl
-"""
-
 import gym
 #import random
 import numpy as np
