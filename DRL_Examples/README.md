@@ -28,7 +28,7 @@ Course Examples in TensorFlow and Keras:
    
    Note: (1) Train DNN while playing games and increasing experience; (2) Single-step update of DNN parameters; (3) Experience replay with low correlation; (4) Fixed Q-targets.
    
-   Algorithm for Deep-Q Learning with Experience Replay:
+   Algorithm for Deep Q Learning with Experience Replay:
    
    ![Image of DNN with Experience Replay](https://github.com/ProfessorDong/Deep-Learning-Course-Examples/blob/master/figures/DQN_experiencereplay.png) 
    
@@ -41,6 +41,9 @@ Course Examples in TensorFlow and Keras:
    
    Note: (1) Full-episode update of DNN parameters.
    
+   Algorithm for REINFORCE Policy Gradients:
+   
+   ![Image of REINFORCE](https://github.com/ProfessorDong/Deep-Learning-Course-Examples/blob/master/figures/REINFORCE.jpg) 
    
 5. Actor-Critic Method to play the cartpole game.
 
