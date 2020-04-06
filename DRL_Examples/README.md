@@ -49,3 +49,7 @@ Course Examples in TensorFlow and Keras:
 
 
 6. Deep Deterministic Policy Gradient to play the pendulum game (continuous-valued actions)
+   
+   DDPG Algorithm:
+   
+   ![Image of REINFORCE](https://github.com/ProfessorDong/Deep-Learning-Course-Examples/blob/master/figures/DDPG_algorithm.png) 
