@@ -47,6 +47,13 @@ Course Examples in TensorFlow and Keras:
    
 5. Actor-Critic Method to play the cartpole game.
 
+   **ActorCritic_run_cartpole.py**  (Tensorflow 1.0)
+   
+   Actor-Critic Algorithm:
+   
+   ![Image of ActorCritic](https://github.com/ProfessorDong/Deep-Learning-Course-Examples/blob/master/figures/ActorCritic.png) 
+   ![Image of ActorCriticAlgorithm](https://github.com/ProfessorDong/Deep-Learning-Course-Examples/blob/master/figures/ActorCriticAlgorithm.jpeg)
+
 
 6. Deep Deterministic Policy Gradient to play the pendulum game (continuous-valued actions)
    
@@ -54,4 +61,4 @@ Course Examples in TensorFlow and Keras:
    
    DDPG Algorithm:
    
-   ![Image of REINFORCE](https://github.com/ProfessorDong/Deep-Learning-Course-Examples/blob/master/figures/DDPG_algorithm.png) 
+   ![Image of DDPG](https://github.com/ProfessorDong/Deep-Learning-Course-Examples/blob/master/figures/DDPG_algorithm.png) 
