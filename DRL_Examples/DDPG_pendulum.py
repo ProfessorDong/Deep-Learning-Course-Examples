@@ -34,7 +34,7 @@ class Actor(object):
         self.action_bound = action_bound
         self.lr = learning_rate
         self.replacement = replacement
-        self.t_replace_counter = 0
+        # self.t_replace_counter = 0
 
         with tf.variable_scope('Actor'):
             # input s, output a
@@ -129,9 +129,9 @@ class Critic(object):
 
         if self.replacement['name'] == 'hard':
             self.t_replace_counter = 0
-            self.hard_replacement = [tf.assign(t, e) for t, e in zip(self.t_params, self.e_params)]
+            self.hard_replace = [tf.assign(t, e) for t, e in zip(self.t_params, self.e_params)]
         else:
-            self.soft_replacement = [tf.assign(t, (1 - self.replacement['tau']) * t + self.replacement['tau'] * e)
+            self.soft_replace = [tf.assign(t, (1 - self.replacement['tau']) * t + self.replacement['tau'] * e)
                                      for t, e in zip(self.t_params, self.e_params)]
 
     def _build_net(self, s, a, scope, trainable):
@@ -153,10 +153,10 @@ class Critic(object):
     def learn(self, s, a, r, s_):
         self.sess.run(self.train_op, feed_dict={S: s, self.a: a, R: r, S_: s_})
         if self.replacement['name'] == 'soft':
-            self.sess.run(self.soft_replacement)
+            self.sess.run(self.soft_replace)
         else:
             if self.t_replace_counter % self.replacement['rep_iter_c'] == 0:
-                self.sess.run(self.hard_replacement)
+                self.sess.run(self.hard_replace)
             self.t_replace_counter += 1
 
 
