@@ -5,4 +5,5 @@ Baylor University, Department of Electrical and Computer Engineering
 
 Course Examples in TensorFlow and Keras:
 
-1. Train a two-layer neural network to approximate a 2D function: **FuncApproxNN.py**
+1. Train a neural network to approximate a 2D function: **FuncApproxV1.ipynb** (with TensorFlow version 1)
+                                                        **FuncApproxV2.ipynb** (with TensorFlow version 2)
