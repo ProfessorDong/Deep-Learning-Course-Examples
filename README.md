@@ -5,6 +5,6 @@ Baylor University, Department of Electrical and Computer Engineering
 
 Course Examples in TensorFlow and Keras:
 
-1. Linear Regression (TensorFlow version 1): **LenearRegression.ipynb**
+1. Linear Regression (TensorFlow version 1): **LinearRegression.ipynb**
 2. With TensorFlow version 1, train a neural network to approximate a 2D function: **FuncApproxV1.ipynb**
 3. With TensorFlow version 2 / Keras, train a neural network to approximate a 2D funiction: **FuncApproxV2.ipynb**
