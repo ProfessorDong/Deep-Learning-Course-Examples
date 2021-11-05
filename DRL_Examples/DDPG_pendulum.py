@@ -23,7 +23,7 @@ BATCH_SIZE = 32
 
 RENDER = False
 OUTPUT_GRAPH = True
-ENV_NAME = 'Pendulum-v0'
+ENV_NAME = 'Pendulum-v1'
 
 ###############################  Actor  ####################################
 
