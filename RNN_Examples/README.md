@@ -26,3 +26,11 @@ Course Examples in TensorFlow and Keras:
    The model is character-based.   
    
    **CharacterGeneratorRNN.ipynb**
+
+4. Transformer Model for Language Understanding
+
+   This notebook trains a Transformer model to translate a Portuguese to English dataset. 
+  
+   The core idea behind the Transformer model is self-attention, i.e., the ability to attend to different positions of the input sequence to compute a representation of that sequence.  In the notebook example, the Transformer creates stacks of self-attention layers and uses Scaled dot product attention and Multi-head attention.
+  
+   **Transformer.ipynb**
