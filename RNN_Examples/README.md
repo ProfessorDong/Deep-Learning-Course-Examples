@@ -23,8 +23,6 @@ Course Examples in TensorFlow and Keras:
 
    This project generates charater using a RNN.  In the notebook example, we will work with a dataset of Shakespeare's writing. Given a sequence of characters from this data ("Shakespear"), train a model to predict the next character in the sequence ("e").  
    
-   The model is character-based.
-   
-   The model is trained on small batches of text (100 characters each), and is able to generate a longer sequence of text with coherent structure.
+   The model is character-based.   
    
    **CharacterGeneratorRNN.ipynb**
