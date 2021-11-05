@@ -1,8 +1,10 @@
+# %tensorflow_version 1.x
+
 import gym
 #import random
 import numpy as np
-from keras.models import Sequential
-from keras.layers import Dense, Dropout
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Dropout
 from statistics import mean, median
 from collections import Counter
 
@@ -134,4 +136,3 @@ env.close()
     
 print('Average Score', sum(scores)/len(scores))
 print('Choice 0: {}, Choice 1: {}'.format(choices.count(0)/len(choices),choices.count(1)/len(choices)))
-
