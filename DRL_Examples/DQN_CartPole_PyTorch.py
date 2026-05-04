@@ -18,7 +18,6 @@ pip install gymnasium[classic-control]
 import gymnasium as gym
 import math
 import random
-import matplotlib
 import matplotlib.pyplot as plt
 
 from collections import namedtuple, deque
@@ -29,40 +28,20 @@ import torch.nn as nn
 import torch.optim as optim
 import torch.nn.functional as F
 
-# Create the CartPole-v1 environment
-env = gym.make("CartPole-v1", render_mode="human")
-
-is_ipython = 'inline' in matplotlib.get_backend()
-if is_ipython:
-    from IPython import display
-
-plt.ion()
+# Two CartPole-v1 envs:
+#   - `env`        runs silently for fast training
+#   - `render_env` opens a pygame window for periodic class demos
+# Rendering every training step would slow learning ~30x, so we only
+# render selected demo episodes and keep training itself headless.
+env        = gym.make("CartPole-v1", render_mode=None)
+render_env = gym.make("CartPole-v1", render_mode="human")
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(device)
 
-def display_test():
-    # Define the number of episodes to run
-    num_episodes = 100
-
-    for episode in range(num_episodes):
-        observation, info = env.reset()  # Reset the environment for each episode
-        done = False
-        total_reward = 0
-
-        while not done:
-            env.render()  # Render the environment
-            action = env.action_space.sample()  # Select an action using a policy (e.g., random)
-            # obs, reward, done, info = env.step(action)  # Take a step in the environment
-            observation , reward , terminated , truncated ,_ = env.step(action)
-            total_reward += reward
-            done  = terminated or truncated
-
-        print(f"Episode {episode + 1}: Total Reward = {total_reward}")
-
-    env.close()
-
-# display_test()
+# How often to pause training and run a rendered greedy demo.
+RENDER_EVERY     = 50    # episodes between checkpoint demos
+N_FINAL_DEMOS    = 3     # rendered showcase episodes after training finishes
 
 # Experience Replay Buffer
 Transition = namedtuple('Transition',('state','action','next_state','reward'))
@@ -138,33 +117,25 @@ def select_action(state):
 # It is used to keep track of the duration of each episode
 episode_durations = []
 
-# Visualize the training progress of the DQN
-def plot_duration(show_result=False):
-    plt.figure(1)
-    durations_t = torch.tensor(episode_durations, dtype=torch.float)
-    if show_result:
-        plt.title("Result")
-    else:
-        plt.clf()
-        plt.title('Training')
-    plt.xlabel('Episode')
-    plt.ylabel('Duration')
-    plt.plot(durations_t.numpy())
 
-    # Show the 100-episode moving average of the duration
-    if len(durations_t) >= 100:
-        means = durations_t.unfold(0, 100, 1).mean(1).view(-1)
-        means = torch.cat((torch.zeros(99), means))
-        plt.plot(means.numpy())
-
-    # plt.pause(0.001)  # Pause so that plots are updated
-
-    if is_ipython:
-        if not show_result:
-            display.display(plt.gcf())
-            display.clear_output(wait=True)
-        else:
-            display.display(plt.gcf())
+def render_demo(label):
+    """
+    Run ONE greedy episode in the rendered env and pop up the live
+    CartPole window.  Uses argmax(Q) -- no exploration noise -- so the
+    students see exactly what the current policy looks like.
+    """
+    state, _ = render_env.reset()
+    state = torch.tensor(state, dtype=torch.float32, device=device).unsqueeze(0)
+    total = 0
+    while True:
+        with torch.no_grad():
+            action = policy_net(state).max(1)[1].view(1, 1)
+        obs, r, terminated, truncated, _ = render_env.step(action.item())
+        total += r
+        if terminated or truncated:
+            break
+        state = torch.tensor(obs, dtype=torch.float32, device=device).unsqueeze(0)
+    print(f"  [demo {label}] duration = {int(total)}")
 
 
 def optimize_model():
@@ -218,6 +189,10 @@ if torch.cuda.is_available():
 else:
     num_episodes = 500
 
+# ---- baseline demo: untrained policy (essentially random) ----
+print("Demo before training (untrained policy)...")
+render_demo(label="ep   0")
+
 # Iterate for episodes
 for i_episode in range(num_episodes):
     # Intialize the environment and get its state
@@ -249,21 +224,51 @@ for i_episode in range(num_episodes):
         # Optimize
         optimize_model()
 
-        # Soft update the target network's weights by blending policy network's weights and target network's weights using a hyperparameter tau
+        # Soft (Polyak) update of the target network: θ⁻ ← τ·θ + (1-τ)·θ⁻
+        # NOTE: previous draft had a bug here -- it read policy_net_state_dict
+        # from target_net.state_dict() (typo), so the target net never updated.
         target_net_state_dict = target_net.state_dict()
-        policy_net_state_dict = target_net.state_dict()
+        policy_net_state_dict = policy_net.state_dict()  # <-- correct source
 
         for key in policy_net_state_dict:
             target_net_state_dict[key] = policy_net_state_dict[key] * TAU + target_net_state_dict[key] * (1 - TAU)
+        target_net.load_state_dict(target_net_state_dict)
 
         if done:
             episode_durations.append(t + 1)
-            plot_duration()
             break
 
+    if (i_episode + 1) % 20 == 0:
+        recent = episode_durations[-20:]
+        print(f"Episode {i_episode+1:4d}/{num_episodes}  "
+              f"duration(last 20) avg = {sum(recent)/len(recent):6.1f}")
+
+    # ---- periodic class demo with the current greedy policy ----
+    if (i_episode + 1) % RENDER_EVERY == 0:
+        render_demo(label=f"ep{i_episode+1:4d}")
+
 print('Complete')
-plot_duration(show_result=True)
-plt.ioff()
+
+# ---- final showcase: a few rendered episodes with the trained policy ----
+print(f"Final showcase ({N_FINAL_DEMOS} rendered episodes)...")
+for k in range(N_FINAL_DEMOS):
+    render_demo(label=f"final {k+1}")
+
+# ---------------------------- plot ------------------------------------------
+plt.figure(figsize=(8, 4))
+durations_t = torch.tensor(episode_durations, dtype=torch.float)
+plt.plot(durations_t.numpy(), alpha=0.4, label="episode duration")
+if len(durations_t) >= 100:
+    means = durations_t.unfold(0, 100, 1).mean(1)
+    means = torch.cat((torch.zeros(99), means))
+    plt.plot(means.numpy(), label="100-ep moving average")
+plt.xlabel("Episode")
+plt.ylabel("Duration")
+plt.title("DQN on CartPole-v1")
+plt.legend()
+plt.tight_layout()
+plt.savefig("DQN_CartPole_curve.png", dpi=120)
 plt.show()
 
 env.close()
+render_env.close()
